@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<h4>DB List</h4>
+@if (TempData["DbList"] != null) {
+    var DBList = (List<MongoDB.Bson.BsonDocument>)TempData["DbList"];
+<table class="table table-bordered">
+    <thead><tr><th>Name</th><th>sizeOnDisk</th><th>empty</th></tr></thead>
+    <tbody>
+        @foreach (var i in DBList) { 
+        <tr>
+            <td>@(i[0].RawValue.ToString())</td>
+            <td>@(i[1].RawValue.ToString())</td>
+            <td>@(i[2].RawValue.ToString())</td>
+        </tr>
+        }
+    </tbody>
+</table>
+}
+<div class="row">
+    <div class="col-sm-12">
+        <form method="post">
+            <div class="row">
+                <label class="control-label col-sm-1">Name</label>
+                <div class="col-sm-3"><input type="text" class="form-control" name="Name" /></div>
+                <label class="control-label col-sm-1">City</label>
+                <div class="col-sm-3"><input type="text" class="form-control" name="City" /></div>
+                <label class="control-label col-sm-1">Remarks</label>
+                <div class="col-sm-3"><textarea type="text" class="form-control" name="Remarks" ></textarea></div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-sm-12 text-right">
+                    <button class="btn btn-primary" type="submit">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
